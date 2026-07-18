@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameVerse | El Portal Definitivo de Juegos AA y AAA</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Explora el universo de los videojuegos AA y AAA. Análisis, noticias, lanzamientos y comparativas técnicas de la industria gaming.">
+    <meta name="keywords" content="Videojuegos, AAA, AA, GTA VI, Elden Ring, PS5, Xbox, PC Gaming, Noticias Gamer">
+    <meta name="author" content="Nasly Saray Medina & Sebastian Hither">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="GameVerse - Revista Digital de Videojuegos">
+    <meta property="og:description" content="Análisis profundo de la industria de los videojuegos de alto presupuesto.">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-card: #121214;
+            --accent-blue: #00d4ff;
+            --accent-purple: #9d00ff;
+            --text-main: #ffffff;
+            --text-dim: #b3b3b3;
+            --neon-glow: 0 0 15px rgba(157, 0, 255, 0.5);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Custom Scrollbar --- */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(var(--accent-purple), var(--accent-blue));
+            border-radius: 10px;
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-blue); }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        #gameSearch {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--glass);
+            background: var(--bg-card);
+            color: white;
+            outline: none;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), var(--bg-dark)), 
+                        url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=2070') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .btn-main {
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+            border: none;
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            text-decoration: none;
+            box-shadow: var(--neon-glow);
+        }
+
+        .btn-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--accent-blue);
+        }
+
+        /* --- Stats Row --- */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 80%;
+            margin-top: 50px;
+        }
+
+        .stat-item {
+            background: var(--glass);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid var(--glass);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        /* --- Content Sections --- */
+        section { padding: 100px 8%; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+        }
+
+        .section-title span { color: var(--accent-purple); }
+
+        /* --- Grid de Juegos --- */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .game-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass);
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            box-shadow: var(--neon-glow);
+        }
+
+        .game-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .game-info { padding: 25px; }
+
+        .game-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 15px;
+            background: var(--accent-blue);
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .game-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .game-desc {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 15px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .rating { color: #ffcc00; font-weight: bold; }
+
+        /* --- Comparativa Table --- */
+        .table-wrapper { overflow-x: auto; margin-top: 40px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--glass);
+        }
+        th { background: var(--accent-purple); color: white; }
+        tr:hover { background: rgba(255,255,255,0.02); }
+
+        /* --- FAQ Accordion --- */
+        .accordion-item {
+            background: var(--bg-card);
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--glass);
+        }
+        .accordion-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .accordion-content {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease-out;
+            color: var(--text-dim);
+        }
+
+        /* --- Contact Form --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        input, textarea {
+            padding: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--glass);
+            border-radius: 8px;
+            color: white;
+        }
+        input:focus { border-color: var(--accent-blue); outline: none; }
+
+        /* --- Authors Card --- */
+        .authors-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .author-card {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            padding: 30px;
+            border-radius: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 50px 8%;
+            background: #000;
+            border-top: 1px solid var(--glass);
+            text-align: center;
+        }
+        .social-icons {
+            margin: 20px 0;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .social-icons i { cursor: pointer; transition: 0.3s; }
+        .social-icons i:hover { color: var(--accent-blue); }
+
+        /* --- Animations --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.8s all ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            nav { display: none; } /* En producción agregar burger menu */
+            .contact-container { grid-template-columns: 1fr; }
+            section { padding: 60px 5%; }
+        }
+
+        /* --- News Section --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .news-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-blue);
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .news-card:hover { background: var(--glass); }
+
+        /* --- Back to Top --- */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-purple);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">GAMEVERSE</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Inicio</a></li>
+                <li><a href="#definitions">Conceptos</a></li>
+                <li><a href="#aaa-games">Juegos AAA</a></li>
+                <li><a href="#aa-games">Juegos AA</a></li>
+                <li><a href="#news">Noticias</a></li>
+                <li><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <input type="text" id="gameSearch" placeholder="Buscar juego...">
+        </div>
+    </header>
+
+    <div id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero">
+        <h1>EXPANDE TU <span style="color: var(--accent-blue);">UNIVERSO</span></h1>
+        <p>La guía definitiva sobre los hitos de la industria gaming. Desde las producciones independientes de alto valor hasta los colosos que definen generaciones.</p>
+        <a href="#aaa-games" class="btn-main">EXPLORAR JUEGOS</a>
+        
+        <div class="stats-container">
+            <div class="stat-item">
+                <span class="stat-number" data-target="200">0</span>
+                <p>Millones de Jugadores</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="500">0</span>
+                <p>Títulos AAA</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="300">0</span>
+                <p>Títulos AA</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" data-target="30">0</span>
+                <p>Estudios Top</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DEFINITIONS SECTION -->
+    <section id="definitions" class="scroll-reveal">
+        <h2 class="section-title">¿Qué son los juegos <span>AA y AAA</span>?</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+            <div>
+                <h3>Videojuegos AAA (Triple A)</h3>
+                <p>Son el equivalente a las "superproducciones" de Hollywood. Cuentan con presupuestos masivos (superando a menudo los 100 millones de dólares), equipos de cientos de desarrolladores y campañas de marketing globales. Buscan el fotorrealismo y la vanguardia técnica.</p>
+                <ul style="margin-top: 15px; color: var(--text-dim);">
+                    <li><strong>Ejemplo:</strong> GTA V, Red Dead Redemption 2.</li>
+                    <li><strong>Ventaja:</strong> Calidad técnica insuperable.</li>
+                    <li><strong>Riesgo:</strong> Poca innovación por miedo al fracaso financiero.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Videojuegos AA (Doble A)</h3>
+                <p>Se sitúan entre el desarrollo Indie y el AAA. Tienen un presupuesto sólido y equipos profesionales (30-100 personas), pero no cuentan con el respaldo financiero infinito de las grandes editoras. Suelen centrarse más en mecánicas creativas y nichos específicos.</p>
+                <ul style="margin-top: 15px; color: var(--text-dim);">
+                    <li><strong>Ejemplo:</strong> Hellblade, Lies of P.</li>
+                    <li><strong>Ventaja:</strong> Mayor libertad creativa y frescura.</li>
+                    <li><strong>Riesgo:</strong> Limitaciones gráficas o de pulido técnico.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- AAA GAMES SECTION -->
+    <section id="aaa-games" class="scroll-reveal">
+        <h2 class="section-title">Los Mejores Juegos <span>AAA</span></h2>
+        <div class="game-grid" id="aaaGrid">
+            <!-- Game Card: GTA VI -->
+            <article class="game-card">
+                <span class="game-badge">Más Esperado</span>
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" alt="GTA VI" class="game-img">
+                <div class="game-info">
+                    <div class="game-meta"><span>2025</span> <span>Rockstar Games</span></div>
+                    <h3>Grand Theft Auto VI</h3>
+                    <p class="rating">⭐ 10/10 (Anticipado)</p>
+                    <p class="game-desc">La culminación del mundo abierto. Ambientado en Vice City, GTA VI promete revolucionar la narrativa interactiva y el nivel de detalle técnico jamás visto en una consola.</p>
+                    <div style="font-size: 0.8rem; color: var(--accent-blue);">PS5, Xbox Series X/S</div>
+                </div>
+            </article>
+
+            <!-- Game Card: Elden Ring -->
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&q=80&w=800" alt="Elden Ring" class="game-img">
+                <div class="game-info">
+                    <div class="game-meta"><span>2022</span> <span>FromSoftware</span></div>
+                    <h3>Elden Ring</h3>
+                    <p class="rating">⭐ 9.8/10</p>
+                    <p class="game-desc">Un RPG de acción épico ambientado en las Tierras Intermedias. Colaboración entre Miyazaki y George R.R. Martin. Ganador del GOTY 2022.</p>
+                    <div style="font-size: 0.8rem; color: var(--accent-blue);">PC, PS5, Xbox</div>
+                </div>
+            </article>
+
+            <!-- Se añadirían el resto de 10 juegos AAA aquí siguiendo el mismo patrón -->
+            <!-- Baldur's Gate 3, Cyberpunk, etc. -->
+        </div>
+    </section>
+
+    <!-- AA GAMES SECTION -->
+    <section id="aa-games" class="scroll-reveal">
+        <h2 class="section-title">Joyas del Desarrollo <span>AA</span></h2>
+        <div class="game-grid" id="aaGrid">
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1605899435973-ca2d1a8861cf?auto=format&fit=crop&q=80&w=800" alt="Lies of P" class="game-img">
+                <div class="game-info">
+                    <div class="game-meta"><span>2023</span> <span>Neowiz</span></div>
+                    <h3>Lies of P</h3>
+                    <p class="rating">⭐ 8.9/10</p>
+                    <p class="game-desc">Una reinterpretación oscura de Pinocho con estilo Soulslike. Sorprendió al mundo por su pulido técnico comparable a un AAA.</p>
+                </div>
+            </article>
+
+            <article class="game-card">
+                <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=800" alt="A Plague Tale" class="game-img">
+                <div class="game-info">
+                    <div class="game-meta"><span>2022</span> <span>Asobo Studio</span></div>
+                    <h3>A Plague Tale: Requiem</h3>
+                    <p class="rating">⭐ 9.0/10</p>
+                    <p class="game-desc">Narrativa emocional y gráficos de vanguardia en una Francia medieval azotada por la peste negra.</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- NEWS SECTION -->
+    <section id="news" class="scroll-reveal">
+        <h2 class="section-title">Noticias <span>Gamer</span></h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <small>HACE 2 HORAS</small>
+                <h4>Resident Evil 9: Filtrado el escenario de isla abierta</h4>
+                <p>Fuentes cercanas a Capcom sugieren que la nueva entrega abandonará la linealidad...</p>
+            </div>
+            <div class="news-card">
+                <small>HACE 5 HORAS</small>
+                <h4>The Witcher 4 entra en pre-producción total</h4>
+                <p>CD Projekt Red confirma que más de 400 desarrolladores ya trabajan en "Polaris"...</p>
+            </div>
+            <div class="news-card">
+                <small>HOY</small>
+                <h4>Xbox portátil podría ser anunciada en 2025</h4>
+                <p>Phil Spencer da pistas sobre el hardware que complementará el ecosistema GamePass...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section id="comparison" class="scroll-reveal">
+        <h2 class="section-title">AAA vs AA: <span>Comparativa Técnica</span></h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Videojuegos AAA</th>
+                        <th>Videojuegos AA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Presupuesto</strong></td>
+                        <td>$80M - $300M+</td>
+                        <td>$5M - $40M</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Equipo</strong></td>
+                        <td>200 - 1000+ personas</td>
+                        <td>30 - 100 personas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Marketing</strong></td>
+                        <td>Masivo / Global</td>
+                        <td>Enfocado / Digital</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Innovación</strong></td>
+                        <td>Conservadora (Iterativa)</td>
+                        <td>Alta / Arriesgada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gráficos</strong></td>
+                        <td>Fotorrealismo Extremo</td>
+                        <td>Estilizados / Alta Calidad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="scroll-reveal">
+        <h2 class="section-title">Preguntas <span>Frecuentes</span></h2>
+        <div id="faqContainer">
+            <div class="accordion-item">
+                <div class="accordion-header">¿Qué significa AAA? <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content"><p>Es un término de marketing usado para clasificar juegos con los presupuestos más altos de desarrollo y promoción de la industria.</p></div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">¿Puede un juego AA ser mejor que un AAA? <i class="fas fa-chevron-down"></i></div>
+                <div class="accordion-content"><p>Absolutamente. Muchos juegos AA como Hellblade han ganado premios a Juego del Año y ofrecen experiencias más originales que los grandes blockbusters.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="scroll-reveal">
+        <div class="contact-container">
+            <div>
+                <h2 class="section-title" style="text-align: left;">Contáctanos</h2>
+                <p>¿Tienes dudas sobre la industria o quieres colaborar con GameVerse?</p>
+                <p style="margin-top: 20px; color: var(--accent-blue);"><i class="fas fa-envelope"></i> sebastianhither@gmail.com</p>
+                
+                <div style="margin-top: 40px;">
+                    <h3>Autores</h3>
+                    <div class="authors-section" style="justify-content: flex-start; margin-top: 20px;">
+                        <div class="author-card" style="width: 200px; padding: 15px;">
+                            <p>Nasly Saray Medina</p>
+                        </div>
+                        <div class="author-card" style="width: 200px; padding: 15px;">
+                            <p>Sebastian Hither</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" placeholder="Nombre Completo" required>
+                <input type="email" placeholder="Correo Electrónico" required>
+                <textarea rows="5" placeholder="Tu Mensaje" required></textarea>
+                <button type="submit" class="btn-main">ENVIAR MENSAJE</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo">GAMEVERSE</div>
+        <p>© 2026 GameVerse - El portal líder en cultura gaming.</p>
+        <div class="social-icons">
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-youtube"></i>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-dim);">Desarrollado por Nasly Saray Medina & Sebastian Hither</p>
+    </footer>
+
+    <script>
+        // --- CONTADORES ANIMADOS ---
+        const stats = document.querySelectorAll('.stat-number');
+        const observerOptions = { threshold: 1 };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = +entry.target.getAttribute('data-target');
+                    let count = 0;
+                    const updateCount = () => {
+                        const increment = target / 50;
+                        if (count < target) {
+                            count += increment;
+                            entry.target.innerText = Math.ceil(count) + "+";
+                            setTimeout(updateCount, 30);
+                        } else {
+                            entry.target.innerText = target + "+";
+                        }
+                    };
+                    updateCount();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        stats.forEach(stat => statsObserver.observe(stat));
+
+        // --- SCROLL REVEAL ANIMATION ---
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- ACCORDION LOGIC ---
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('i');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+
+        // --- BUSCADOR DE JUEGOS ---
+        const searchInput = document.getElementById('gameSearch');
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.game-card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                if (title.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // --- BOTÓN VOLVER ARRIBA ---
+        const btt = document.getElementById('backToTop');
+        window.onscroll = () => {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                btt.style.display = "flex";
+            } else {
+                btt.style.display = "none";
+            }
+        };
+        btt.onclick = () => window.scrollTo(0, 0);
+
+        // --- VALIDACIÓN DE FORMULARIO ---
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias por contactar con GameVerse! Tu mensaje ha sido enviado con éxito.');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
